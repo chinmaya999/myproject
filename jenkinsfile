@@ -1,0 +1,15 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Deploy') {
+            steps {
+                sh '''
+                pkill -f sample-app-1.0-SNAPSHOT.jar || true
+                nohup java -jar target/sample-app-1.0-SNAPSHOT.jar > app.log 2>&1 &
+                '''
+            }
+        }
+    }
+}
+
